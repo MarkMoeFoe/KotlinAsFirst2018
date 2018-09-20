@@ -105,7 +105,13 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    for (i in 2..Math.min(m, n) / 2) {
+        if (m % i == 0 && n % i == 0) return false
+    }
+
+    return (Math.max(m, n) % Math.min(m, n) != 0) || (Math.min(m, n) == 1)
+}
 
 /**
  * Простая
@@ -159,7 +165,17 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var number = n
+    var rev = 0
+    while (number != 0) {
+        rev *= 10
+        rev += number % 10
+        number /= 10
+    }
+
+    return rev
+}
 
 /**
  * Средняя
@@ -180,7 +196,11 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    if (n < 10) return false
+    else if (hasDifferentDigits(n / 10)) return true
+    else return (n / 10) % 10 != n % 10
+}
 
 /**
  * Сложная
