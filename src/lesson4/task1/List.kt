@@ -141,7 +141,14 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.0.
  */
-fun times(a: List<Double>, b: List<Double>): Double = TODO()
+fun times(a: List<Double>, b: List<Double>): Double {
+    if (a.isEmpty()) return 0.0
+    var scalarProduct = 0.0
+    for (i in 0 until a.size) {
+        scalarProduct += a[i] * b[i]
+    }
+    return scalarProduct
+}
 
 /**
  * Средняя
@@ -181,7 +188,20 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int):  String {
+    val factores = mutableListOf<Int>()
+    var number = n
+    for (i in 2..Math.sqrt(n.toDouble()).toInt()) {
+        while (number % i == 0) {
+            factores.add(i)
+            number /= i
+        }
+    }
+    if (number > 1) {
+        factores.add(number)
+    }
+    return factores.joinToString("*")
+}
 
 /**
  * Средняя
@@ -220,7 +240,11 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int):  Int {
+    return str.
+            map { if (it in '0'..'9') it - '0' else it - 'a' + 10 }.
+            fold(0) { prevResult, element -> prevResult * base + element }
+}
 
 /**
  * Сложная

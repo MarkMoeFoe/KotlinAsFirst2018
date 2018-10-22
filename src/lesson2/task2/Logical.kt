@@ -65,6 +65,6 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val numB = (if(b <= r) 1 else 0) + (if(b <= s) 1 else 0)
     val numC = (if(c <= r) 1 else 0) + (if(c <= s) 1 else 0)
     val sumABC = numA + numB + numC
-    val mx = Math.max(Math.max(numA, numB), numC)
-    return (sumABC > 2 && mx == 2)
+    val maxOf = Math.max(Math.max(numA, numB), numC)
+    return (sumABC > 2 && maxOf == 2)
 }

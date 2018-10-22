@@ -109,7 +109,22 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    var maxJump = -1
+
+    for (jump in jumps.split(Regex(""" +"""))) {
+        if (jump != "-" && jump != "%") {
+            val valueJump = try {
+                jump.toInt()
+            } catch (e: NumberFormatException) {
+                return -1
+            }
+            maxJump = Math.max(maxJump, valueJump)
+        }
+    }
+
+    return maxJump
+}
 
 /**
  * Сложная
@@ -132,7 +147,34 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    if (expression.trim() == "") return 0
+
+    var result = 0
+    var previous = "+"
+    val signs = listOf("+", "-")
+
+    for (element in expression.split(Regex(""" +"""))) {
+        if (previous in signs) {
+            val number = try {
+                element.toInt()
+            } catch (e: NumberFormatException) {
+                throw IllegalArgumentException()
+            }
+            if (number < 0) throw IllegalArgumentException()
+
+            if (previous == "+") result += number
+            else result -= number
+        } else {
+            if (element !in signs) throw IllegalArgumentException()
+        }
+        previous = element
+    }
+
+    if (previous in signs) throw IllegalArgumentException()
+
+    return result
+}
 
 /**
  * Сложная
