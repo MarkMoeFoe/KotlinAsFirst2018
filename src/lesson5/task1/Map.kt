@@ -232,7 +232,14 @@ fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean {
+    val set = mutableSetOf<String>()
+    for (word in words) {
+        if (set.contains(word.reversed())) return true
+        else set.add(word)
+    }
+    return false
+}
 
 /**
  * Сложная
@@ -251,7 +258,22 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val mp = mutableMapOf<Int, Int>()
+    for (i in 0 until list.size) {
+        val otherNumber = number - list[i]
+        if (mp.containsKey(otherNumber)) {
+            val j = mp[otherNumber] ?: 0
+            return Pair(Math.min(i, j), Math.max(i, j))
+        } else {
+            mp[list[i]] = i
+        }
+    }
+    return Pair(-1, -1)
+}
+fun main(args: Array<String>) {
+    findSumOfTwo(listOf(-6, 10, -100, 0), 10)
+}
 
 /**
  * Очень сложная
